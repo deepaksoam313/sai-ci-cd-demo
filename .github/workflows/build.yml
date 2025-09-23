@@ -11,31 +11,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+    - name: Set up Java 21
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '21'
 
-      - name: Compile Java code
-        run: |
-          javac HelloServer.java
+    - name: List files (debug)
+      run: ls -R
 
-      - name: Create Manifest file
-        run: |
-          mkdir -p META-INF
-          echo "Manifest-Version: 1.0" > META-INF/MANIFEST.MF
-          echo "Main-Class: HelloServer" >> META-INF/MANIFEST.MF
+    - name: Compile Java
+      run: javac HelloServer.java
 
-      - name: Build executable JAR
-        run: |
-          jar cfm helloserver.jar META-INF/MANIFEST.MF *.class
+    - name: Create manifest
+      run: |
+        mkdir -p META-INF
+        echo "Manifest-Version: 1.0" > META-INF/MANIFEST.MF
+        echo "Main-Class: HelloServer" >> META-INF/MANIFEST.MF
 
-      - name: Upload JAR as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: helloserver-jar
-          path: helloserver.jar
+    - name: Create JAR
+      run: jar cfm helloserver.jar META-INF/MANIFEST.MF *.class
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: helloserver-jar
+        path: helloserver.jar
