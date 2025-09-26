@@ -56,14 +56,17 @@ jobs:
     - name: Run SonarQube Scanning
       env:
         JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.8-9/x64
-        PATH: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.8-9/x64/bin:${{ env.PATH }}
       shell: bash
       run: |
+        export PATH="/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.8-9/x64/bin:$PATH"
+        echo "PATH=$PATH"
+        which sh
         sonar-scanner \
           -Dsonar.projectKey=my-java-project \
           -Dsonar.sources=. \
           -Dsonar.host.url=http://3.110.83.166:9000 \
           -Dsonar.login='sqa_69e7c04e275904c9a0c4581a695c8f1b93435f6c'
+
 
 
 
