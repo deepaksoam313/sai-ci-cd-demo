@@ -41,3 +41,13 @@ jobs:
       with:
         name: helloserver-jar
         path: helloserver.jar
+        
+    - name: Run SonarQube Scanning
+      run: |
+        sonar-scanner \
+        -Dsonar.projectKey=my-java-project \
+        -Dsonar.sources=. \
+        -Dsonar.host.url='http://3.110.83.166:9000/' \
+        -Dsonar.login='sqa_69e7c04e275904c9a0c4581a695c8f1b93435f6c'
+        
+        
