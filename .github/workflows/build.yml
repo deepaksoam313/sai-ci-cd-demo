@@ -54,12 +54,14 @@ jobs:
       env:
         JAVA_HOME: ${{ env.JAVA_HOME }}
         PATH: ${{ env.JAVA_HOME }}/bin:${{ env.PATH }}
+      shell: bash
       run: |
         sonar-scanner \
           -Dsonar.projectKey=my-java-project \
           -Dsonar.sources=. \
           -Dsonar.host.url=http://3.110.83.166:9000 \
           -Dsonar.login='sqa_69e7c04e275904c9a0c4581a695c8f1b93435f6c'
+
 
 
         
