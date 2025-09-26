@@ -49,11 +49,14 @@ jobs:
     - name: Add Sonar Scanner to PATH
       run: echo "${{ github.workspace }}/sonar-scanner-4.8.0.2856-linux/bin" >> $GITHUB_PATH
 
+    - name: Check /bin/sh existence
+      run: ls -l /bin/sh /usr/bin/sh || true
+
     
     - name: Run SonarQube Scanning
       env:
-        JAVA_HOME: ${{ env.JAVA_HOME }}
-        PATH: ${{ env.JAVA_HOME }}/bin:${{ env.PATH }}
+        JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.8-9/x64
+        PATH: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.8-9/x64/bin:${{ env.PATH }}
       shell: bash
       run: |
         sonar-scanner \
