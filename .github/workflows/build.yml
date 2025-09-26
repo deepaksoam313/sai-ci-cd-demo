@@ -42,12 +42,19 @@ jobs:
         name: helloserver-jar
         path: helloserver.jar
         
+    - name: Install Sonar Scanner
+      run: |
+        curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+        unzip sonar-scanner.zip
+        export PATH="$PATH:$(pwd)/sonar-scanner-4.8.0.2856-linux/bin"
+    
     - name: Run SonarQube Scanning
       run: |
         sonar-scanner \
         -Dsonar.projectKey=my-java-project \
         -Dsonar.sources=. \
-        -Dsonar.host.url='http://3.110.83.166:9000/' \
+        -Dsonar.host.url=http://3.110.83.166:9000 \
         -Dsonar.login='sqa_69e7c04e275904c9a0c4581a695c8f1b93435f6c'
+
         
         
